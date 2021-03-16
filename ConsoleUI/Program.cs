@@ -9,7 +9,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Console UI Started!");
 
             IProductService productManager = new ProductManager(new EfProductDal());
             foreach (var product in productManager.GetByUnitPrice(20, 100))
