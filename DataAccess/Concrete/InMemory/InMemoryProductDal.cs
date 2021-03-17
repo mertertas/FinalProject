@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace DataAccess.Concrete.InMemory
 {
@@ -64,6 +65,11 @@ namespace DataAccess.Concrete.InMemory
             productToUpdate.UnitPrice = product.UnitPrice;
             productToUpdate.UnitsInStock = product.UnitsInStock;
             
+        }
+
+        public List<ProductDetailDto> GetProductDetails()
+        {
+            throw new NotImplementedException();
         }
     }
 }

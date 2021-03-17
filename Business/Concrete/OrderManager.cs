@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Business.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entities
+namespace Business.Concrete
 {
-    public interface IDto
+   public class OrderManager:IOrderService
     {
     }
 }

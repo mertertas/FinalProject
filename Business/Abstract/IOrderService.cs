@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entities
+namespace Business.Abstract
 {
-    public interface IDto
+   public interface IOrderService
     {
     }
 }

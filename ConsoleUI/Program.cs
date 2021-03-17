@@ -11,10 +11,21 @@ namespace ConsoleUI
         {
             Console.WriteLine("Console UI Started!");
             //ProductTest();
-            CategoryTest();
+            //CategoryTest();
+
+            ProductDetailTest();
 
             Console.ReadLine();
 
+        }
+
+        private static void ProductDetailTest()
+        {
+            ProductManager productManager = new ProductManager(new EfProductDal());
+            foreach (var product in productManager.GetProductDetails())
+            {
+                Console.WriteLine(product.ProductName + "/" + product.CategoryName);
+            }
         }
 
         private static void CategoryTest()

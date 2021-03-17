@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Core.DataAccess.EntityFrameworkRepositoryBase
 {
    public class EntityFrameworkRepositoryBase<TEntity,TContext>:IEntityRepository<TEntity>
-        where TEntity:class,IEntity,new()
+        where TEntity:class,IDto,new()
         where TContext:DbContext,new()
     {
         public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
