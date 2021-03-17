@@ -2,7 +2,7 @@
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.Concrete.EntityFreamwork
+namespace DataAccess.Concrete.EntityFramework
 {
     public class NorthwindContext:DbContext
     {
@@ -14,5 +14,6 @@ namespace DataAccess.Concrete.EntityFreamwork
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }

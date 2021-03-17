@@ -3,7 +3,7 @@ using Core.Entities;
 
 namespace DataAccess.Abstract
 {
-    public  interface ICategoryDal:IEntitiyRepository<Category>
+    public  interface ICategoryDal:IEntityRepository<Category>
     {
         
     }
