@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Core.Entities
 
 {
-   public class Category:IDto
+   public class Category:IEntity
     {
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }

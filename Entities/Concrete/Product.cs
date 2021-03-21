@@ -3,7 +3,7 @@
 
 namespace Entities.Concrete
 {
-    public class Product : IDto
+    public class Product : IEntity
     {
         public int ProductId { get; set; }
         public int CategoryId { get; set; }

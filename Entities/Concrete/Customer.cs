@@ -2,7 +2,7 @@
 
 namespace Entities.Concrete
 {
-    public  class Customer:IDto
+    public  class Customer:IEntity
     {
         public string CustomerId { get; set; }
         public string ContactName { get; set; }
