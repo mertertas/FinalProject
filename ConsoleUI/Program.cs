@@ -14,57 +14,57 @@ namespace ConsoleUI
             //CategoryTest();
             //ProductDetailTest();
 
-            ProductGetAllTest();
+            //ProductGetAllTest();
 
             Console.ReadLine();
 
         }
 
-        private static void ProductGetAllTest()
-        {
-            ProductManager productManager = new ProductManager(new EfProductDal());
+        //private static void ProductGetAllTest()
+        //{
+        //    ProductManager productManager = new ProductManager(new EfProductDal());
 
-            var result = productManager.GetAll();
+        //    var result = productManager.GetAll();
 
-            if (result.Success)
-            {
-                foreach (var product in result.Data)
-                {
-                    Console.WriteLine(product.ProductName);
-                }
-            }
+        //    if (result.Success)
+        //    {
+        //        foreach (var product in result.Data)
+        //        {
+        //            Console.WriteLine(product.ProductName);
+        //        }
+        //    }
 
-            else
-            {
-                Console.WriteLine(result.Message);
-            }
-        }
+        //    else
+        //    {
+        //        Console.WriteLine(result.Message);
+        //    }
+        //}
 
         private static void ProductDetailTest()
         {
-            ProductManager productManager = new ProductManager(new EfProductDal());
+            ProductManager productManager = new ProductManager(new EfProductDal(), new CategoryManager(new EfCategoryDal())) ;
             foreach (var product in productManager.GetProductDetails().Data)
             {
                 Console.WriteLine(product.ProductName + "/" + product.CategoryName);
             }
         }
 
-        private static void CategoryTest()
-        {
-            ICategoryService categoryService = new CategoryManager(new EfCategoryDal());
-            foreach (var category in categoryService.GetAll().Data)
-            {
-                Console.WriteLine(category.CategoryName);
-            }
-        }
+        //private static void CategoryTest()
+        //{
+        //    ICategoryService categoryService = new CategoryManager(new EfCategoryDal());
+        //    foreach (var category in categoryService.GetAll().Data)
+        //    {
+        //        Console.WriteLine(category.CategoryName);
+        //    }
+        //}
 
-        private static void ProductTest()
-        {
-            IProductService productManager = new ProductManager(new EfProductDal());
-            foreach (var product in productManager.GetByUnitPrice(20, 100).Data)
-            {
-                Console.WriteLine(product.ProductName);
-            }
-        }
+        //private static void ProductTest()
+        //{
+        //    IProductService productManager = new ProductManager(new EfProductDal());
+        //    foreach (var product in productManager.GetByUnitPrice(20, 100).Data)
+        //    {
+        //        Console.WriteLine(product.ProductName);
+        //    }
+        //}
     }
 }
