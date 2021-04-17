@@ -12,6 +12,10 @@ using Core.CrossCuttingConcerns.Validation;
 using Core.Aspects.Autofac.Validation;
 using System.Linq;
 using Core.Utilities.Business;
+using Business.BusinessAspects.Autofac;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 
 namespace Business.Concrete
 {
@@ -25,7 +29,9 @@ namespace Business.Concrete
             _categoryService = categoryService;
 
         }
-
+        [TransactionScopeAspect]
+        [CacheRemoveAspect("IProductService.Get")]
+        [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
@@ -45,6 +51,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ProductAdded);
         }
 
+        [PerformanceAspect(5)]
+        [CacheAspect]
         public IDataResult<List<Product>> GetAll()
         {
             if (DateTime.Now.Hour == 22)
@@ -54,30 +62,38 @@ namespace Business.Concrete
 
             return new SuccesDataResult<List<Product>>(_productDal.GetAll(), Messages.ProductsListed);
         }
-
+        [CacheAspect]
         public IDataResult<List<Product>> GetAllByCategoryId(int id)
         {
             return new SuccesDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == id));
         }
 
+        [PerformanceAspect(5)]
+        [CacheAspect]
         public IDataResult<Product> GetById(int productId)
         {
             return new SuccesDataResult<Product>(_productDal.Get(p => p.ProductId == productId));
         }
 
+        [CacheAspect]
         public IDataResult<List<Product>> GetByUnitPrice(decimal min, decimal max)
         {
             return new SuccesDataResult<List<Product>>(_productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max));
         }
-
+        [CacheAspect]
         public IDataResult<List<ProductDetailDto>> GetProductDetails()
         {
             return new SuccesDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails());
         }
 
+        [TransactionScopeAspect]
+        [CacheRemoveAspect("IProductService.Get")]
+        [ValidationAspect(typeof(ProductValidator))]
+        [SecuredOperation("product.add,admin")]
         public IResult Update(Product product)
         {
-            throw new NotImplementedException();
+            _productDal.Update(product);
+            return new SuccessResult(Messages.ProductUptaded);
         }
 
         private IResult CheckIfProductCountOfCategoryCorrect(int categoryId)
@@ -108,6 +124,15 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.PCategoryCountControlExceed);
             }
             return new SuccessResult();
+        }
+
+        [SecuredOperation("product.add,admin")]
+        [TransactionScopeAspect]
+        [CacheRemoveAspect("IProductService.Get")]
+        public IResult Delete(Product product)
+        {
+            _productDal.Delete(product);
+            return new SuccessResult(Messages.ProductDeleted);
         }
     }
 }
